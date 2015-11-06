@@ -157,7 +157,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pmr-mP-oAB" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="hNV-9F-blK" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1456" y="-24"/>
+            <point key="canvasLocation" x="1768" y="415"/>
         </scene>
         <!--Trip Display View Controller-->
         <scene sceneID="Iq2-FK-pzx">
@@ -175,34 +175,118 @@
                     <connections>
                         <outlet property="nowayView" destination="6fc-vD-dl1" id="S8C-v7-dh2"/>
                         <outlet property="wayView" destination="MaZ-aQ-vMr" id="cdt-XZ-kkh"/>
+                        <outlet property="wpTableView" destination="6Wk-SN-vi0" id="jOw-ry-Y4m"/>
+                        <segue destination="xEZ-EY-TYa" kind="show" identifier="AddWaypoint" id="0eh-Mq-o6T"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Reu-ai-GjI" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <view contentMode="scaleToFill" id="6fc-vD-dl1">
-                    <rect key="frame" x="0.0" y="0.0" width="428" height="225"/>
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kM6-Fc-HiS">
-                            <rect key="frame" x="191" y="98" width="46" height="30"/>
-                            <state key="normal" title="Button"/>
+                            <rect key="frame" x="236" y="264" width="128" height="71"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="71" id="sC3-f6-AEZ"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="35"/>
+                            <state key="normal" title="click me">
+                                <color key="titleColor" red="0.96027568807834229" green="0.95831044270210142" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
                             <connections>
-                                <action selector="changeHasWaypoint:" destination="B5R-wv-0CN" eventType="touchUpInside" id="lcQ-Mm-fpt"/>
+                                <action selector="triggerAddNewWPView:" destination="B5R-wv-0CN" eventType="touchUpInside" id="pxR-9H-EyU"/>
                             </connections>
                         </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="new trippa mane" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ChM-Ak-sJe">
+                            <rect key="frame" x="139" y="146" width="323" height="94"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="94" id="wOg-fg-SUM"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="44"/>
+                            <color key="textColor" red="0.99676608339515038" green="0.99329656229340357" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="highlightedColor" red="0.65116461020000005" green="1" blue="0.92850003459999997" alpha="1" colorSpace="calibratedRGB"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" red="0.37357785884493355" green="1" blue="0.5187158751857579" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstItem="kM6-Fc-HiS" firstAttribute="centerY" secondItem="6fc-vD-dl1" secondAttribute="centerY" id="AMQ-0b-qxP"/>
-                        <constraint firstItem="kM6-Fc-HiS" firstAttribute="centerX" secondItem="6fc-vD-dl1" secondAttribute="centerX" id="Uh0-kT-rEd"/>
+                        <constraint firstItem="kM6-Fc-HiS" firstAttribute="centerX" secondItem="6fc-vD-dl1" secondAttribute="centerX" id="MBj-Du-0jM"/>
+                        <constraint firstItem="kM6-Fc-HiS" firstAttribute="top" secondItem="ChM-Ak-sJe" secondAttribute="bottom" constant="24" id="Ysa-Dm-sJg"/>
+                        <constraint firstItem="kM6-Fc-HiS" firstAttribute="centerY" secondItem="6fc-vD-dl1" secondAttribute="centerY" id="cS3-UH-njw"/>
+                        <constraint firstItem="ChM-Ak-sJe" firstAttribute="centerX" secondItem="kM6-Fc-HiS" secondAttribute="centerX" id="rhb-9n-suD"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" id="MaZ-aQ-vMr">
-                    <rect key="frame" x="0.0" y="0.0" width="430" height="223"/>
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6Wk-SN-vi0">
+                            <rect key="frame" x="0.0" y="266" width="600" height="334"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="334" id="Pfc-a4-G7o"/>
+                            </constraints>
+                        </tableView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="blamo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lKP-7J-nuq">
+                            <rect key="frame" x="206" y="94" width="189" height="80"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="189" id="RjC-53-VvF"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="67"/>
+                            <color key="textColor" red="0.99676608339999995" green="0.99329656229999996" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
                     <color key="backgroundColor" red="0.38728193535118316" green="0.87453065323773316" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="6Wk-SN-vi0" secondAttribute="bottom" id="DPb-y2-UaJ"/>
+                        <constraint firstItem="lKP-7J-nuq" firstAttribute="centerX" secondItem="6Wk-SN-vi0" secondAttribute="centerX" id="Y7P-q2-Ita"/>
+                        <constraint firstItem="6Wk-SN-vi0" firstAttribute="leading" secondItem="MaZ-aQ-vMr" secondAttribute="leading" id="i9O-cL-1M9"/>
+                        <constraint firstItem="6Wk-SN-vi0" firstAttribute="top" secondItem="lKP-7J-nuq" secondAttribute="bottom" constant="92" id="szd-8v-HTC"/>
+                        <constraint firstAttribute="trailing" secondItem="6Wk-SN-vi0" secondAttribute="trailing" id="zSm-92-TkW"/>
+                    </constraints>
                 </view>
             </objects>
-            <point key="canvasLocation" x="1345" y="1402"/>
+            <point key="canvasLocation" x="732" y="1790"/>
+        </scene>
+        <!--NewWaypointNewTripViewController-->
+        <scene sceneID="buv-AC-1aC">
+            <objects>
+                <viewController id="xEZ-EY-TYa" userLabel="NewWaypointNewTripViewController" customClass="NewWaypointNewTripViewController" customModule="Trip_Planner" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="zs1-2o-uMR"/>
+                        <viewControllerLayoutGuide type="bottom" id="VC2-8t-MjV"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="eSj-DP-AYW">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="otP-Zo-bJ4">
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="otP-Zo-bJ4" firstAttribute="bottom" secondItem="VC2-8t-MjV" secondAttribute="top" id="20r-yi-tKy"/>
+                            <constraint firstAttribute="trailing" secondItem="otP-Zo-bJ4" secondAttribute="trailing" id="8XS-JR-w48"/>
+                            <constraint firstItem="otP-Zo-bJ4" firstAttribute="leading" secondItem="eSj-DP-AYW" secondAttribute="leading" id="QsN-34-oqD"/>
+                            <constraint firstItem="otP-Zo-bJ4" firstAttribute="top" secondItem="zs1-2o-uMR" secondAttribute="bottom" id="mfR-TD-rB4"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Title" id="oPD-8G-DYu">
+                        <barButtonItem key="rightBarButtonItem" title="searchy" id="KNv-bf-Nns">
+                            <connections>
+                                <action selector="searchPlacesBtn:" destination="xEZ-EY-TYa" id="7ix-TV-MoX"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="mapView" destination="otP-Zo-bJ4" id="N41-0c-b6N"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hCy-H8-XFO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1768" y="1790"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ZGB-C9-buU">
@@ -218,7 +302,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cF8-nT-XIR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-174" y="341"/>
+            <point key="canvasLocation" x="-290" y="415"/>
         </scene>
     </scenes>
 </document>

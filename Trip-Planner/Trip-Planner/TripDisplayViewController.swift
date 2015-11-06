@@ -32,6 +32,22 @@ class TripDisplayViewController: UIViewController {
 
     }
     
+    @IBAction func triggerAddNewWPView(sender: UIButton) {
+        performSegueWithIdentifier("AddWaypoint", sender: sender)
+    }
+    
+    
+    
+    
+    @IBAction func unwindToSegue(segue: UIStoryboardSegue) {
+        
+    }
+    
+//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+//        // Get the new view controller using segue.destinationViewController.
+//        // Pass the selected object to the new view controller.
+//        
+//    }
 
     /*
     // MARK: - Navigation
@@ -47,6 +63,10 @@ class TripDisplayViewController: UIViewController {
     @IBOutlet weak var nowayView: UIView!
 
     @IBOutlet weak var wayView: UIView!
+    
+    
+    @IBOutlet weak var wpTableView: UITableView!
+    
     
     var newTripViewController = NewTripViewController()
     
@@ -69,10 +89,11 @@ class TripDisplayViewController: UIViewController {
 //            print("Could not fetch \(error), \(error.userInfo)")
 //        }
 //    }
-    
-    @IBAction func changeHasWaypoint(sender: UIButton) {
-        specificTrip!.setValue(true, forKey: "haswaypoint")
-    }
+
+
+//    @IBAction func changeHasWaypoint(sender: UIButton) {
+//        specificTrip!.setValue(true, forKey: "haswaypoint")
+//    }
     
     
     func displayView() {
@@ -86,13 +107,23 @@ class TripDisplayViewController: UIViewController {
         print(specificTrip)
         
         if specificTrip?.haswaypoint == false {
+        self.nowayView.frame = self.view.frame
         self.view.addSubview(self.nowayView)
         } else {
+        self.wayView.frame = self.view.frame
         self.view.addSubview(self.wayView)
         }
         
         
         
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "AddWaypoints" {
+            let destination = segue.destinationViewController as! NewWaypointNewTripViewController
+                destination.loltrip = specificTrip
+            
+        }
     }
     
     
