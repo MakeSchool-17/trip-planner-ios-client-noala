@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import GoogleMaps
 
 class NewWaypointNewTripViewController: UIViewController,UISearchBarDelegate, LocateOnTheMap {
     
@@ -17,7 +18,7 @@ class NewWaypointNewTripViewController: UIViewController,UISearchBarDelegate, Lo
     
     @IBOutlet weak var mapView: UIView!
 
-    @IBAction func searchPlacesBtn(sender: UIBarButtonItem) {
+    @IBAction func searchPlacesBtn(sender: AnyObject) {
         
         let searchController = UISearchController(searchResultsController: searchResultController)
         searchController.searchBar.delegate = self
@@ -27,7 +28,7 @@ class NewWaypointNewTripViewController: UIViewController,UISearchBarDelegate, Lo
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        self.googleMapsView =  GMSMapView(frame: self.mapViewContainer.frame)
+        self.googleMapsView =  GMSMapView(frame: self.mapView.frame)
         self.view.addSubview(self.googleMapsView)
         searchResultController = SearchResultsController()
         searchResultController.delegate = self
