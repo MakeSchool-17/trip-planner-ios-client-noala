@@ -1,5 +1,5 @@
 //
-//  Trip+CoreDataProperties.swift
+//  Waypoint+CoreDataProperties.swift
 //  Trip-Planner
 //
 //  Created by jdoge on 11/7/15.
@@ -12,10 +12,11 @@
 import Foundation
 import CoreData
 
-extension Trip {
+extension Waypoint {
 
-    @NSManaged var haswaypoint: NSNumber?
+    @NSManaged var lon: NSNumber?
+    @NSManaged var lat: NSNumber?
     @NSManaged var name: String?
-    @NSManaged var groupedWP: NSSet?
+    @NSManaged var tripOwner: Trip?
 
 }

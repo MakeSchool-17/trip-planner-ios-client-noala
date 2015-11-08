@@ -9,11 +9,21 @@
 import UIKit
 import GoogleMaps
 
-class NewWaypointNewTripViewController: UIViewController,UISearchBarDelegate, LocateOnTheMap {
+class NewWaypointNewTripViewController: UIViewController,UISearchBarDelegate, LocateOnTheMap, SaveWaypointFromMap {
     
     var searchResultController:SearchResultsController!
     var resultsArray = [String]()
     var googleMapsView:GMSMapView!
+    
+    let parent = TripDisplayViewController()
+    
+    var loltrip: Trip?
+    
+    @IBAction func saveWaypoint(sender: UIButton) {
+        // self.waypoints = CoreDataHelper.getAllWaypoints()
+        // SaveWaypointFromMap.self
+        loltrip!.setValue(true, forKey: "haswaypoint")
+    }
     
     
     @IBOutlet weak var mapView: UIView!
@@ -31,13 +41,12 @@ class NewWaypointNewTripViewController: UIViewController,UISearchBarDelegate, Lo
         self.googleMapsView =  GMSMapView(frame: self.mapView.frame)
         self.view.addSubview(self.googleMapsView)
         searchResultController = SearchResultsController()
+        searchResultController.thisTripOwner = loltrip
         searchResultController.delegate = self
-        
+        searchResultController.saveDelegate = self
+        print(loltrip)
     }
 
-    let parent = TripDisplayViewController()
-    
-    var loltrip: Trip?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,6 +72,15 @@ class NewWaypointNewTripViewController: UIViewController,UISearchBarDelegate, Lo
             marker.title = title
             marker.map = self.googleMapsView
         }
+        
+//        print(lon)
+//        print(lat)
+//        print(title)
+    }
+    
+    func saveWaypointToCore(lon: Double, andLatitude lat: Double, andName name: String, andTripOwner tripOwner: Trip) {
+
+        CoreDataHelper.addWaypoint(lon, andLatitude: lat, andName: name, andTripOwner: tripOwner)
     }
     
     
@@ -112,3 +130,6 @@ class NewWaypointNewTripViewController: UIViewController,UISearchBarDelegate, Lo
 //        
 //    }
 }
+
+
+

@@ -21,10 +21,16 @@ protocol LocateOnTheMap{
     func locateWithLongitude(lon:Double, andLatitude lat:Double, andTitle title: String)
 }
 
+protocol SaveWaypointFromMap {
+    func saveWaypointToCore(lon: Double, andLatitude lat: Double, andName name: String, andTripOwner tripOwner: Trip)
+}
+
 class SearchResultsController: UITableViewController {
     
     var searchResults: [String]!
     var delegate: LocateOnTheMap!
+    var saveDelegate: SaveWaypointFromMap!
+    var thisTripOwner: Trip!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,7 +71,7 @@ class SearchResultsController: UITableViewController {
         // 2
         let correctedAddress:String! = self.searchResults[indexPath.row].stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.symbolCharacterSet())
         let url = NSURL(string: "https://maps.googleapis.com/maps/api/geocode/json?address=\(correctedAddress)&sensor=false")
-        print(correctedAddress)
+
         let task = NSURLSession.sharedSession().dataTaskWithURL(url!) { (data, response, error) -> Void in
             // 3
             do {
@@ -74,12 +80,14 @@ class SearchResultsController: UITableViewController {
                     
                     let lat = dic["results"]?.valueForKey("geometry")?.valueForKey("location")?.valueForKey("lat")?.objectAtIndex(0) as! Double
                     let lon = dic["results"]?.valueForKey("geometry")?.valueForKey("location")?.valueForKey("lng")?.objectAtIndex(0) as! Double
+                    let tripOwner = self.thisTripOwner
                     // 4
                     self.delegate.locateWithLongitude(lon, andLatitude: lat, andTitle: self.searchResults[indexPath.row])
-                    print(self.searchResults[indexPath.row])
-                    print(lat)
-                    print(lon)
-                    print(dic)
+                    // print(self.searchResults[indexPath.row])
+                    // print(lat)
+                    // print(lon)
+                    // print(dic)
+                    self.saveDelegate.saveWaypointToCore(lon, andLatitude: lat, andName: self.searchResults[indexPath.row], andTripOwner: tripOwner)
                 }
                 
             } catch {

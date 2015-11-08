@@ -12,6 +12,16 @@ import CoreData
 class TripDisplayViewController: UIViewController {
     
     var specificTrip: Trip?
+    
+    var waypoints: [Waypoint] = []
+    
+    @IBOutlet weak var nowayView: UIView!
+    
+    @IBOutlet weak var wayView: UIView!
+    
+    
+    @IBOutlet weak var wpTableView: UITableView!
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,9 +37,9 @@ class TripDisplayViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated);
-
+        self.waypoints = CoreDataHelper.getAllWaypoints(specificTrip!)
         self.displayView()
-
+        self.wpTableView.reloadData()
     }
     
     @IBAction func triggerAddNewWPView(sender: UIButton) {
@@ -37,7 +47,10 @@ class TripDisplayViewController: UIViewController {
     }
     
     
-    
+    @IBAction func addWpTo(sender: AnyObject) {
+        performSegueWithIdentifier("AddWaypoint", sender: sender)
+    }
+
     
     @IBAction func unwindToSegue(segue: UIStoryboardSegue) {
         
@@ -60,40 +73,7 @@ class TripDisplayViewController: UIViewController {
     */
     
     
-    @IBOutlet weak var nowayView: UIView!
-
-    @IBOutlet weak var wayView: UIView!
-    
-    
-    @IBOutlet weak var wpTableView: UITableView!
-    
-    
     var newTripViewController = NewTripViewController()
-    
-//    func findTripInfo() {
-//        //1
-//        let appDelegate =
-//        UIApplication.sharedApplication().delegate as! AppDelegate
-//        
-//        let managedContext = appDelegate.managedObjectContext
-//        
-//        //2
-//        let fetchRequest = NSFetchRequest(entityName: "Trip")
-//        
-//        //3
-//        do {
-//            let results = try managedContext.executeFetchRequest(fetchRequest)
-//            TripArray = results as! [NSManagedObject]
-//            
-//        } catch let error as NSError {
-//            print("Could not fetch \(error), \(error.userInfo)")
-//        }
-//    }
-
-
-//    @IBAction func changeHasWaypoint(sender: UIButton) {
-//        specificTrip!.setValue(true, forKey: "haswaypoint")
-//    }
     
     
     func displayView() {
@@ -105,6 +85,7 @@ class TripDisplayViewController: UIViewController {
 //        print(self.TripArray.dictionaryWithValuesForKeys(["name"]))
         
         print(specificTrip)
+        print(waypoints)
         
         if specificTrip?.haswaypoint == false {
         self.nowayView.frame = self.view.frame
@@ -119,7 +100,7 @@ class TripDisplayViewController: UIViewController {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "AddWaypoints" {
+        if segue.identifier == "AddWaypoint" {
             let destination = segue.destinationViewController as! NewWaypointNewTripViewController
                 destination.loltrip = specificTrip
             
@@ -128,4 +109,41 @@ class TripDisplayViewController: UIViewController {
     
     
 
+}
+
+
+extension TripDisplayViewController: UITableViewDataSource {
+    
+    
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCellWithIdentifier("wpCell", forIndexPath: indexPath)
+        
+        let waypoint = waypoints[indexPath.row]
+        
+        cell.textLabel!.text = waypoint.name
+
+        return cell
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return waypoints.count
+    }
+    
+}
+
+
+extension TripDisplayViewController: UITableViewDelegate {
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        self.performSegueWithIdentifier("AddWaypoint", sender: waypoints[indexPath.row])
+        
+    }
+    
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    
 }

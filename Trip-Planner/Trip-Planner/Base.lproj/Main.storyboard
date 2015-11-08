@@ -159,7 +159,7 @@
             </objects>
             <point key="canvasLocation" x="1768" y="415"/>
         </scene>
-        <!--Trip Display View Controller-->
+        <!--Title-->
         <scene sceneID="Iq2-FK-pzx">
             <objects>
                 <viewController id="B5R-wv-0CN" customClass="TripDisplayViewController" customModule="Trip_Planner" customModuleProvider="target" sceneMemberID="viewController">
@@ -172,6 +172,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Title" id="Erc-fS-cEo">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="NJx-PP-mry">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="379-lw-P02">
+                                <rect key="frame" x="447" y="7" width="133" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="addWpTo:" destination="B5R-wv-0CN" eventType="touchUpInside" id="PeN-WJ-FR2"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="nowayView" destination="6fc-vD-dl1" id="S8C-v7-dh2"/>
                         <outlet property="wayView" destination="MaZ-aQ-vMr" id="cdt-XZ-kkh"/>
@@ -225,6 +237,20 @@
                             <constraints>
                                 <constraint firstAttribute="height" constant="334" id="Pfc-a4-G7o"/>
                             </constraints>
+                            <prototypes>
+                                <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="wpCell" id="q29-CC-ybl">
+                                    <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="q29-CC-ybl" id="xpm-kW-1cK">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                    </tableViewCellContentView>
+                                </tableViewCell>
+                            </prototypes>
+                            <connections>
+                                <outlet property="dataSource" destination="B5R-wv-0CN" id="TPt-A8-fsg"/>
+                                <outlet property="delegate" destination="B5R-wv-0CN" id="785-9j-btk"/>
+                            </connections>
                         </tableView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="blamo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lKP-7J-nuq">
                             <rect key="frame" x="206" y="94" width="189" height="80"/>
@@ -273,7 +299,16 @@
                             <constraint firstItem="otP-Zo-bJ4" firstAttribute="top" secondItem="zs1-2o-uMR" secondAttribute="bottom" id="mfR-TD-rB4"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Title" id="oPD-8G-DYu">
+                    <navigationItem key="navigationItem" id="oPD-8G-DYu">
+                        <nil key="title"/>
+                        <button key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="vLs-9h-UpX">
+                            <rect key="frame" x="180" y="7" width="240" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="save"/>
+                            <connections>
+                                <action selector="saveWaypoint:" destination="xEZ-EY-TYa" eventType="touchUpInside" id="e5T-LU-Yc8"/>
+                            </connections>
+                        </button>
                         <barButtonItem key="rightBarButtonItem" title="searchy" id="KNv-bf-Nns">
                             <connections>
                                 <action selector="searchPlacesBtn:" destination="xEZ-EY-TYa" id="7ix-TV-MoX"/>

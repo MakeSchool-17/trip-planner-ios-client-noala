@@ -3,8 +3,16 @@
     <entity name="Trip" representedClassName=".Trip" syncable="YES">
         <attribute name="haswaypoint" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="groupedWP" toMany="YES" deletionRule="Nullify" destinationEntity="Waypoint" inverseName="tripOwner" inverseEntity="Waypoint" syncable="YES"/>
+    </entity>
+    <entity name="Waypoint" representedClassName=".Waypoint" syncable="YES">
+        <attribute name="lat" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="lon" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="tripOwner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Trip" inverseName="groupedWP" inverseEntity="Trip" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Trip" positionX="-657" positionY="-603" width="128" height="73"/>
+        <element name="Trip" positionX="-866" positionY="-684" width="128" height="88"/>
+        <element name="Waypoint" positionX="-657" positionY="-585" width="128" height="88"/>
     </elements>
 </model>

@@ -81,7 +81,6 @@ extension TripsViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCellWithIdentifier("TripCell", forIndexPath: indexPath) as! TripTableViewCell
         
         let trip = trips[indexPath.row]
-            
         cell.textLabel!.text = trip.name
         
         return cell

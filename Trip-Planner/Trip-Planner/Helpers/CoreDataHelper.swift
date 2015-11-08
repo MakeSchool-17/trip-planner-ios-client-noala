@@ -46,4 +46,33 @@ class CoreDataHelper {
         return results
     }
     
+    static func addWaypoint(lon: Double, andLatitude lat: Double, andName name: String, andTripOwner tripOwner: Trip) {
+        let waypoint: Waypoint = NSEntityDescription.insertNewObjectForEntityForName("Waypoint", inManagedObjectContext: managedObjectContext) as! Waypoint
+        waypoint.lon = lon
+        waypoint.lat = lat
+        waypoint.name = name
+        waypoint.tripOwner = tripOwner
+        
+        do {
+            try managedObjectContext.save()
+        } catch let error as NSError {
+            print("Could not save \(error), \(error.userInfo)")
+        }
+        
+    }
+    
+    static func getAllWaypoints(nameTrip: Trip) -> [Waypoint] {
+        let predicate = NSPredicate(format: "%K== %@", "tripOwner", nameTrip)
+        let fetchRequest = NSFetchRequest(entityName: "Waypoint")
+        fetchRequest.predicate = predicate
+        var results = [Waypoint]()
+
+        do {
+            results = try managedObjectContext.executeFetchRequest(fetchRequest) as! [Waypoint]
+        } catch let error as NSError {
+            print("Could not fetch \(error), \(error.userInfo)")
+        }
+        return results
+    }
+    
 }

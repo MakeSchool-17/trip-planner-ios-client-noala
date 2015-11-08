@@ -1,5 +1,5 @@
 //
-//  Trip.swift
+//  Waypoint.swift
 //  Trip-Planner
 //
 //  Created by jdoge on 11/6/15.
@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-class Trip: NSManagedObject {
+class Waypoint: NSManagedObject {
 
 // Insert code here to add functionality to your managed object subclass
 
