@@ -84,8 +84,8 @@ class TripDisplayViewController: UIViewController {
 //        print(self.TripArray.dictionaryWithValuesForKeys(["haswaypoint"]))
 //        print(self.TripArray.dictionaryWithValuesForKeys(["name"]))
         
-        print(specificTrip)
-        print(waypoints)
+//        print(specificTrip)
+//        print(waypoints)
         
         if specificTrip?.haswaypoint == false {
         self.nowayView.frame = self.view.frame
@@ -144,6 +144,30 @@ extension TripDisplayViewController: UITableViewDelegate {
     
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
+    }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if (editingStyle == .Delete) {
+            
+            let wpToDelete = waypoints[indexPath.row]
+            
+            // Delete it from the managedObjectContext
+            CoreDataHelper.deleteWaypoint(wpToDelete)
+            
+            // Refresh the variable to reflect new values
+            self.waypoints = CoreDataHelper.getAllWaypoints(specificTrip!)
+            
+            // Tell the table view to animate out that row
+            //wpTableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            
+            // Refresh the table view to indicate that it's deleted
+            
+            
+            self.wpTableView.reloadData()
+            
+            
+        }
+        // self.wpTableView.reloadData()
     }
     
 }

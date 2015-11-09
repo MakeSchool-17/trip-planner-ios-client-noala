@@ -32,11 +32,23 @@ class SearchResultsController: UITableViewController {
     var saveDelegate: SaveWaypointFromMap!
     var thisTripOwner: Trip!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.searchResults = Array()
         self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cellIdentifier")
         
+        
+//        var tableFrame = self.tableView.frame
+//        var height = self.tableView.rowHeight
+//        height *= CGFloat(self.searchResults.count)
+//        tableFrame.size.height = height
+//        self.view.frame = tableFrame
+        
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
     }
     
     override func didReceiveMemoryWarning() {

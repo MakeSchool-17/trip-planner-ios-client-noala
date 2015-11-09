@@ -99,6 +99,8 @@ class NewWaypointNewTripViewController: UIViewController,UISearchBarDelegate, Lo
             }
             self.searchResultController.reloadDataWithArray(self.resultsArray)
         }
+        
+
     }
     
     
