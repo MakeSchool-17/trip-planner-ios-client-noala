@@ -19,6 +19,8 @@ class NewWaypointNewTripViewController: UIViewController,UISearchBarDelegate, Lo
     
     var loltrip: Trip?
     
+    var thisWaypoint: Waypoint?
+    
     @IBAction func saveWaypoint(sender: UIButton) {
         // self.waypoints = CoreDataHelper.getAllWaypoints()
         // SaveWaypointFromMap.self
@@ -44,7 +46,13 @@ class NewWaypointNewTripViewController: UIViewController,UISearchBarDelegate, Lo
         searchResultController.thisTripOwner = loltrip
         searchResultController.delegate = self
         searchResultController.saveDelegate = self
-        print(loltrip)
+        print(thisWaypoint)
+        if thisWaypoint != nil {
+        self.setMapLocate()
+        print(thisWaypoint!.name)
+        }
+        //print(loltrip)
+        
     }
 
 
@@ -59,6 +67,12 @@ class NewWaypointNewTripViewController: UIViewController,UISearchBarDelegate, Lo
         // Dispose of any resources that can be recreated.
     }
     
+    func setMapLocate(){
+        let title = thisWaypoint?.name
+        let lat = Double(thisWaypoint!.lat!)
+        let lon = Double(thisWaypoint!.lon!)
+        self.locateWithLongitude(lon, andLatitude: lat, andTitle: title!)
+    }
     
     func locateWithLongitude(lon: Double, andLatitude lat: Double, andTitle title: String) {
         

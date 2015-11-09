@@ -15,6 +15,8 @@ class TripDisplayViewController: UIViewController {
     
     var waypoints: [Waypoint] = []
     
+    var handWaypoint: Waypoint?
+    
     @IBOutlet weak var nowayView: UIView!
     
     @IBOutlet weak var wayView: UIView!
@@ -103,7 +105,14 @@ class TripDisplayViewController: UIViewController {
         if segue.identifier == "AddWaypoint" {
             let destination = segue.destinationViewController as! NewWaypointNewTripViewController
                 destination.loltrip = specificTrip
-            
+            if let toWaypoint = sender as? Waypoint?{
+                destination.thisWaypoint = toWaypoint
+            }
+                //destination.thisWaypoint = handWaypoint
+            print(handWaypoint)
+//            if let toWaypoint = sender as! Waypoint?{
+//                destination.thisWaypoint = toWaypoint
+//            }
         }
     }
     
@@ -139,7 +148,7 @@ extension TripDisplayViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         self.performSegueWithIdentifier("AddWaypoint", sender: waypoints[indexPath.row])
-        
+
     }
     
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
